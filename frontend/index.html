@@ -4,156 +4,319 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CloudNova Portfolio</title>
-
-  <!-- Styles will be added later -->
   <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
 
-  <!-- Header / Global Navigation -->
-  <header>
-    <h1>CloudNova</h1>
-    <p>From Ground to Cloud</p>
+<header>
+  <h1>CloudNova</h1>
+  <p>From Ground to Cloud</p>
 
-    <nav>
-      <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#devops">DevOps</a></li>
-        <li><a href="#about">About</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#devops">DevOps</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- Main Content -->
-  <main class="control-center">
+<main class="control-center">
 
-    <section id="overview" class="panel panel-main" tabindex="-1" data-accent="overview">
-
+<!-- OVERVIEW -->
+<section id="overview" class="panel panel-main" tabindex="-1" data-accent="overview">
   <div class="section-header">
     <span class="section-label">SYSTEM OVERVIEW</span>
     <h2 class="section-title">Cloud & DevOps Control Center</h2>
     <div class="section-accent-line"></div>
   </div>
 
-  <p>
-    This is a personal cloud and DevOps portfolio built by a junior cloud engineer.
-    It demonstrates real-world learning through implemented systems and clear documentation.
+  <p class="section-intro">
+    A live, evolving control center demonstrating how I learn, design, and operate cloud systems.
   </p>
 
   <div class="status-grid">
-    <div class="status-item">
-      <span class="status-label">Role</span>
-      <span class="status-value">Junior Cloud Engineer</span>
-    </div>
-
-    <div class="status-item">
-      <span class="status-label">Focus</span>
-      <span class="status-value">AWS · Terraform · DevOps</span>
-    </div>
-
-    <div class="status-item">
-      <span class="status-label">Project Status</span>
-      <span class="status-value">Actively Building</span>
-    </div>
-
-    <div class="status-item">
-      <span class="status-label">Deployment</span>
-      <span class="status-value">Planned (Serverless)</span>
-    </div>
+    <div class="status-item"><span class="status-label">Current Role</span><span class="status-value"> Junior Cloud Engineer</span></div>
+    <div class="status-item"><span class="status-label">Active Focus</span><span class="status-value"> AWS · Terraform · DevOps</span></div>
+    <div class="status-item"><span class="status-label">Current Build</span><span class="status-value"> CloudNova Portfolio</span></div>
+    <div class="status-item"><span class="status-label">Learning Mode</span><span class="status-value"> Hands-on · Proof-driven</span></div>
+    <div class="status-item"><span class="status-label">Deployment Target</span><span class="status-value"> S3 + CloudFront (planned)</span></div>
+    <div class="status-item"><span class="status-label">System State</span><span class="status-value"> Actively evolving</span></div>
   </div>
-
 </section>
 
-
+<!-- SKILLS -->
 <section id="skills" class="panel" tabindex="-1" data-accent="skills">
-
   <div class="section-header">
     <span class="section-label">SKILL MATRIX</span>
     <h2 class="section-title">Cloud, DevOps & Engineering Stack</h2>
     <div class="section-accent-line"></div>
   </div>
 
-  <p>
-    Cloud, infrastructure, backend, and DevOps skills used in this project.
+  <p class="section-intro">
+    Core technologies and practices I actively use and deepen through hands-on projects.
   </p>
 
+  <div class="skills-matrix">
+
+    <div class="skill-group">
+      <h3 class="skill-group-title">Cloud & Infrastructure</h3>
+      <ul class="skill-list">
+        <li><a href="#architecture" class="skill-link">AWS Core Services</a><span class="skill-level">Active Use</span></li>
+        <li><span class="skill-name">IAM & Security Models</span><span class="skill-level">Practicing</span></li>
+        <li><span class="skill-name">Cloud Architecture Patterns</span><span class="skill-level">Learning</span></li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3 class="skill-group-title">Infrastructure as Code</h3>
+      <ul class="skill-list">
+        <li><a href="#architecture" class="skill-link">Terraform</a><span class="skill-level">Active Use</span></li>
+        <li><span class="skill-name">State & Modules</span><span class="skill-level">Practicing</span></li>
+        <li><span class="skill-name">Environment Separation</span><span class="skill-level">Learning</span></li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3 class="skill-group-title">DevOps & Delivery</h3>
+      <ul class="skill-list">
+        <li><a href="#devops" class="skill-link">Git & GitHub</a><span class="skill-level">Active Use</span></li>
+        <li><span class="skill-name">CI/CD Concepts</span><span class="skill-level">Learning</span></li>
+        <li><span class="skill-name">Monitoring & Observability</span><span class="skill-level">Planned</span></li>
+      </ul>
+    </div>
+
+    <div class="skill-group">
+      <h3 class="skill-group-title">Frontend & Systems Thinking</h3>
+      <ul class="skill-list">
+        <li><a href="#projects" class="skill-link">HTML / CSS / JS</a><span class="skill-level">Active Use</span></li>
+        <li><span class="skill-name">Accessibility & UX Flow</span><span class="skill-level">Practicing</span></li>
+        <li><span class="skill-name">System Design Thinking</span><span class="skill-level">Developing</span></li>
+      </ul>
+    </div>
+
+  </div>
 </section>
 
-
+<!-- PROJECTS -->
 <section id="projects" class="panel" tabindex="-1" data-accent="projects">
-
   <div class="section-header">
     <span class="section-label">DELIVERY</span>
     <h2 class="section-title">Projects & Case Studies</h2>
     <div class="section-accent-line"></div>
   </div>
 
-  <p>
-    Hands-on projects demonstrating applied cloud and DevOps concepts.
+  <p class="section-intro">
+    Practical implementations that turn cloud and DevOps concepts into working systems.
   </p>
 
+  <div class="project-grid">
+    <article class="project-card">
+      <h3 class="project-title">CloudNova Portfolio Control Center</h3>
+      <p class="project-summary">
+        A single-page control-center portfolio demonstrating architecture, DevOps workflows, and frontend state handling.
+      </p>
+      <ul class="project-proof">
+        <li>✔ Structured Git history</li>
+        <li>✔ Accessible keyboard navigation</li>
+        <li>✔ Proof-first architecture sections</li>
+      </ul>
+    </article>
+  </div>
 </section>
 
-
+<!-- ARCHITECTURE -->
 <section id="architecture" class="panel" tabindex="-1" data-accent="architecture">
-
   <div class="section-header">
     <span class="section-label">PROOF · NOT CLAIMS</span>
     <h2 class="section-title">Architecture & Infrastructure</h2>
     <div class="section-accent-line"></div>
   </div>
 
-  <p>
-    Architecture and infrastructure decisions behind this portfolio,
-    including AWS services and design trade-offs.
+  <p class="section-intro">
+    Concrete infrastructure designs showing decisions, trade-offs, and constraints.
   </p>
+
+  <div class="architecture-grid">
+
+  <article class="architecture-card">
+    <h3 class="architecture-title">Frontend Hosting Strategy</h3>
+    <p class="architecture-desc">
+      The portfolio is designed as a static single-page application to enable
+      low-latency global delivery and simple deployment.
+    </p>
+    <ul class="architecture-proof">
+      <li>✔ Static HTML / CSS / JS</li>
+      <li>✔ CDN-friendly structure</li>
+      <li>✔ No runtime backend dependency</li>
+    </ul>
+    <span class="architecture-tech">Planned: S3 + CloudFront</span>
+  </article>
+
+  <article class="architecture-card">
+    <h3 class="architecture-title">Infrastructure as Code</h3>
+    <p class="architecture-desc">
+      All cloud resources are planned to be defined using Infrastructure as Code
+      to ensure repeatability and transparency.
+    </p>
+    <ul class="architecture-proof">
+      <li>✔ Terraform modules</li>
+      <li>✔ Version-controlled infrastructure</li>
+      <li>✔ Environment separation</li>
+    </ul>
+    <span class="architecture-tech">Terraform</span>
+  </article>
+
+  <article class="architecture-card">
+    <h3 class="architecture-title">Security & Access Model</h3>
+    <p class="architecture-desc">
+      Security is approached with least-privilege principles and
+      service-level isolation.
+    </p>
+    <ul class="architecture-proof">
+      <li>✔ IAM role separation</li>
+      <li>✔ No hardcoded credentials</li>
+      <li>✔ Public access minimized</li>
+    </ul>
+    <span class="architecture-tech">IAM · AWS Best Practices</span>
+  </article>
+
+</div>
 
 </section>
 
-
+<!-- DEVOPS -->
 <section id="devops" class="panel" tabindex="-1" data-accent="devops">
-
   <div class="section-header">
     <span class="section-label">OPERATIONS</span>
     <h2 class="section-title">CI/CD, Automation & Tooling</h2>
     <div class="section-accent-line"></div>
   </div>
 
-  <p>
-    Repository structure, workflow, and automation practices used during development.
+  <p class="section-intro">
+    How code moves from idea to delivery.
   </p>
+
+  <div class="devops-timeline">
+
+  <div class="devops-step">
+    <span class="devops-icon">01</span>
+    <h3 class="devops-title">Plan & Design</h3>
+    <p class="devops-desc">
+      Define architecture, choose services, and document decisions before implementation.
+    </p>
+    <span class="devops-tech">Docs · Diagrams · ADRs</span>
+  </div>
+
+  <div class="devops-step">
+    <span class="devops-icon">02</span>
+    <h3 class="devops-title">Build & Version</h3>
+    <p class="devops-desc">
+      Implement features incrementally with clear commits and structured repository layout.
+    </p>
+    <span class="devops-tech">Git · GitHub</span>
+  </div>
+
+  <div class="devops-step">
+    <span class="devops-icon">03</span>
+    <h3 class="devops-title">Automate</h3>
+    <p class="devops-desc">
+      Define infrastructure and workflows as code to ensure repeatable environments.
+    </p>
+    <span class="devops-tech">Terraform · CI/CD</span>
+  </div>
+
+  <div class="devops-step">
+    <span class="devops-icon">04</span>
+    <h3 class="devops-title">Deploy</h3>
+    <p class="devops-desc">
+      Release changes safely with minimal manual steps and clear rollback paths.
+    </p>
+    <span class="devops-tech">AWS · Serverless</span>
+  </div>
+
+  <div class="devops-step">
+    <span class="devops-icon">05</span>
+    <h3 class="devops-title">Observe & Improve</h3>
+    <p class="devops-desc">
+      Monitor behavior, review outcomes, and iterate based on real feedback.
+    </p>
+    <span class="devops-tech">Logs · Metrics · Iteration</span>
+  </div>
+
+</div>
 
 </section>
 
-
+<!-- ABOUT -->
 <section id="about" class="panel" tabindex="-1" data-accent="about">
-
   <div class="section-header">
     <span class="section-label">VISION</span>
     <h2 class="section-title">Growth Path & CloudNova Direction</h2>
     <div class="section-accent-line"></div>
   </div>
 
-  <p>
-    Current learning stage, future improvements, and how this project will evolve.
+  <p class="section-intro">
+    From junior engineer to CloudNova consulting.
   </p>
+
+  <div class="roadmap">
+
+  <div class="roadmap-stage">
+    <span class="roadmap-phase">NOW</span>
+    <h3 class="roadmap-title">Junior Cloud Engineer</h3>
+    <p class="roadmap-desc">
+      Focused on building strong foundations in AWS, infrastructure design,
+      and DevOps workflows through hands-on implementation.
+    </p>
+    <ul class="roadmap-points">
+      <li>✔ AWS fundamentals & architecture patterns</li>
+      <li>✔ Terraform-based infrastructure planning</li>
+      <li>✔ Version control & clean delivery practices</li>
+    </ul>
+  </div>
+
+  <div class="roadmap-stage">
+    <span class="roadmap-phase">NEXT</span>
+    <h3 class="roadmap-title">Cloud / DevOps Engineer</h3>
+    <p class="roadmap-desc">
+      Expanding into production-grade systems with automation,
+      CI/CD pipelines, and operational visibility.
+    </p>
+    <ul class="roadmap-points">
+      <li>✔ Automated deployments</li>
+      <li>✔ Monitoring & observability</li>
+      <li>✔ Multi-environment infrastructure</li>
+    </ul>
+  </div>
+
+  <div class="roadmap-stage">
+    <span class="roadmap-phase">FUTURE</span>
+    <h3 class="roadmap-title">CloudNova Consulting</h3>
+    <p class="roadmap-desc">
+      Transforming CloudNova into a consulting platform focused on
+      scalable, secure, and maintainable cloud systems.
+    </p>
+    <ul class="roadmap-points">
+      <li>✔ Real client case studies</li>
+      <li>✔ Reusable infrastructure modules</li>
+      <li>✔ Architecture-driven consulting</li>
+    </ul>
+  </div>
+
+</div>
 
 </section>
 
+</main>
 
-  </main>
+<footer>
+  <p>Personal learning project · CloudNova</p>
+</footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>
-      Personal learning project · Junior Cloud Engineer · CloudNova concept
-    </p>
-  </footer>
-
-  <!-- Scripts will be added later -->
-  <script src="js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
