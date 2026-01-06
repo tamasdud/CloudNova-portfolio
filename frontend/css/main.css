@@ -205,16 +205,24 @@ section p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+  align-items: start;
 }
 
 /* Main overview panel */
 .panel-main {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, #131a2f, #0f1424);
-  border: 1px solid #1f2640;
-  border-radius: 12px;
-  padding: 2.5rem;
+  background: linear-gradient(135deg, #141c35, #0f1424);
+  border: 1px solid #2a3566;
+  border-radius: 14px;
+  padding: 3rem;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  transform: translateZ(20px);
 }
+
 
 /* Standard panels */
 .panel {
@@ -222,6 +230,12 @@ section p {
   border: 1px solid #1f2640;
   border-radius: 12px;
   padding: 2rem;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 10px 30px rgba(0, 0, 0, 0.35);
+
+  transform: translateZ(10px);
 }
 
 .panel h2 {
