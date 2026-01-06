@@ -1,7 +1,17 @@
+/**
+ * CloudNova Control Center
+ * ------------------------
+ * Handles all interactive behavior for the portfolio.
+ * Clean, state-aware, accessible.
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("CloudNova Control Center initialized");
 
-  // Cache DOM elements
+  /* =========================
+     Cache DOM elements
+     ========================= */
+
   const sections = {
     overview: document.getElementById("overview"),
     skills: document.getElementById("skills"),
@@ -13,7 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const navLinks = document.querySelectorAll("nav a");
 
-  // Handle navigation click state
+  /* =========================
+     Navigation click handling
+     ========================= */
+
   navLinks.forEach(link => {
     link.addEventListener("click", () => {
       navLinks.forEach(l => l.classList.remove("active"));
@@ -21,104 +34,75 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Sync navigation + section visibility with scroll
+  /* =========================
+     Scroll-based section state
+     ========================= */
+
   const observerOptions = {
     root: null,
     threshold: 0.6,
   };
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          entry.target.classList.add("active-section");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
 
-          Object.values(sections).forEach(section => {
-            if (section && section !== entry.target) {
-              section.classList.remove("active-section");
-            }
-          });
+      // Reveal section
+      entry.target.classList.add("visible");
+      entry.target.classList.add("active-section");
 
-          const id = entry.target.getAttribute("id");
-
-          navLinks.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${id}`) {
-              link.classList.add("active");
-            }
-          });
+      // Remove focus from others
+      Object.values(sections).forEach(section => {
+        if (section && section !== entry.target) {
+          section.classList.remove("active-section");
         }
       });
-    },
-    observerOptions
-  );
+
+      // Sync navigation
+      const id = entry.target.getAttribute("id");
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${id}`) {
+          link.classList.add("active");
+        }
+      });
+    });
+  }, observerOptions);
 
   Object.values(sections).forEach(section => {
     if (section) observer.observe(section);
   });
 
-  // Keyboard navigation (NOW sections exists)
+  /* =========================
+     Keyboard navigation
+     ========================= */
+
   const sectionOrder = Object.values(sections).filter(Boolean);
   let currentIndex = 0;
 
   document.addEventListener("keydown", (event) => {
+    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+
+    event.preventDefault();
+
     if (event.key === "ArrowDown") {
-      event.preventDefault();
       currentIndex = Math.min(currentIndex + 1, sectionOrder.length - 1);
-      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
-      sectionOrder[currentIndex].focus({ preventScroll: true });
     }
 
     if (event.key === "ArrowUp") {
-      event.preventDefault();
       currentIndex = Math.max(currentIndex - 1, 0);
-      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
-      sectionOrder[currentIndex].focus({ preventScroll: true });
     }
 
     if (event.key === "Home") {
-      event.preventDefault();
       currentIndex = 0;
-      sectionOrder[0].scrollIntoView({ behavior: "smooth" });
-      sectionOrder[currentIndex].focus({ preventScroll: true });
     }
 
     if (event.key === "End") {
-      event.preventDefault();
       currentIndex = sectionOrder.length - 1;
-      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
-      sectionOrder[currentIndex].focus({ preventScroll: true });
     }
+
+    const targetSection = sectionOrder[currentIndex];
+    targetSection.scrollIntoView({ behavior: "smooth" });
+    targetSection.focus({ preventScroll: true });
   });
 });
-  // Keyboard navigation between sections
-  const sectionOrder = Object.values(sections).filter(Boolean);
-
-  let currentIndex = 0;
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      currentIndex = Math.min(currentIndex + 1, sectionOrder.length - 1);
-      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
-    }
-
-    if (event.key === "ArrowUp") {
-      event.preventDefault();
-      currentIndex = Math.max(currentIndex - 1, 0);
-      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
-    }
-
-    if (event.key === "Home") {
-      event.preventDefault();
-      currentIndex = 0;
-      sectionOrder[0].scrollIntoView({ behavior: "smooth" });
-    }
-
-    if (event.key === "End") {
-      event.preventDefault();
-      currentIndex = sectionOrder.length - 1;
-      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
-    }
-  });

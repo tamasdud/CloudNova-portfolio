@@ -8,16 +8,18 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
   background-color: #0b0f1a;
   color: #e6e9f0;
   line-height: 1.6;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
 }
-html {
-  scroll-behavior: smooth;
-}
-
 
 /* =========================
    Header / Navigation
@@ -53,10 +55,12 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
+
 nav a.active {
   color: #3a4bff;
   font-weight: 500;
 }
+
 /* =========================
    Focus-visible accessibility
    ========================= */
@@ -74,37 +78,6 @@ section:focus-visible {
 }
 
 /* =========================
-   Active section focus
-   ========================= */
-
-section {
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
-}
-
-section.active-section {
-  box-shadow: 0 0 0 1px rgba(58, 75, 255, 0.35),
-              0 12px 40px rgba(0, 0, 0, 0.35);
-  transform: translateY(-2px);
-}
-
-/* =========================
-   Section entrance polish
-   ========================= */
-
-section {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-
-/* =========================
    Main layout
    ========================= */
 
@@ -114,11 +87,52 @@ main {
   padding: 2rem;
 }
 
+/* =========================
+   Section base (SINGLE SOURCE)
+   ========================= */
+
 section {
+  min-height: 100vh;
+  padding: 4rem 6rem;
   margin-bottom: 3rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid #1e2333;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  scroll-snap-align: start;
+
+  /* Entrance default */
+  opacity: 0;
+  transform: translateY(12px);
+
+  /* Unified transitions */
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    box-shadow 0.4s ease;
 }
+
+/* =========================
+   Section states
+   ========================= */
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section.active-section {
+  box-shadow: 0 0 0 1px rgba(58, 75, 255, 0.35),
+              0 12px 40px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Section content
+   ========================= */
 
 section h2 {
   font-size: 1.4rem;
@@ -130,17 +144,6 @@ section p {
   max-width: 800px;
 }
 
-/* =========================
-   Footer
-   ========================= */
-
-footer {
-  padding: 2rem;
-  text-align: center;
-  color: #8b93b1;
-  font-size: 0.85rem;
-  border-top: 1px solid #1e2333;
-}
 /* =========================
    Control Center Layout
    ========================= */
@@ -168,15 +171,14 @@ footer {
   padding: 2rem;
 }
 
-/* Panel headings */
 .panel h2 {
   margin-bottom: 0.75rem;
 }
 
-/* Slight hover hint (no animation yet) */
 .panel:hover {
   border-color: #3a4bff;
 }
+
 /* =========================
    Status widgets
    ========================= */
@@ -207,4 +209,16 @@ footer {
 .status-value {
   font-size: 0.95rem;
   color: #e6e9f0;
+}
+
+/* =========================
+   Footer
+   ========================= */
+
+footer {
+  padding: 2rem;
+  text-align: center;
+  color: #8b93b1;
+  font-size: 0.85rem;
+  border-top: 1px solid #1e2333;
 }
