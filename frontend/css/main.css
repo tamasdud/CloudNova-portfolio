@@ -49,6 +49,11 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
+nav a.active {
+  color: #3a4bff;
+  font-weight: 500;
+}
+
 
 /* =========================
    Main layout

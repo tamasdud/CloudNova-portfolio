@@ -30,4 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // - section highlighting
   // - panel transitions
   // - live data updates
+    // Handle navigation click state
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
+
 });
