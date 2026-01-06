@@ -58,6 +58,20 @@ nav a.active {
   font-weight: 500;
 }
 /* =========================
+   Active section focus
+   ========================= */
+
+section {
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+section.active-section {
+  box-shadow: 0 0 0 1px rgba(58, 75, 255, 0.35),
+              0 12px 40px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+/* =========================
    Section entrance polish
    ========================= */
 

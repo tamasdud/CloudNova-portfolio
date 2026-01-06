@@ -43,21 +43,33 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.6,
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        const id = entry.target.getAttribute("id");
+    const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          entry.target.classList.add("active-section");
 
-        navLinks.forEach(link => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${id}`) {
-            link.classList.add("active");
-          }
-        });
-      }
-    });
-  }, observerOptions);
+          Object.values(sections).forEach(section => {
+            if (section && section !== entry.target) {
+              section.classList.remove("active-section");
+            }
+          });
+
+          const id = entry.target.getAttribute("id");
+
+          navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${id}`) {
+              link.classList.add("active");
+            }
+          });
+        }
+      });
+    },
+    observerOptions
+  );
+
 
   Object.values(sections).forEach(section => {
     if (section) observer.observe(section);
