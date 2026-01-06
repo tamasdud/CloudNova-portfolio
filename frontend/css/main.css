@@ -123,3 +123,34 @@ footer {
 .panel:hover {
   border-color: #3a4bff;
 }
+/* =========================
+   Status widgets
+   ========================= */
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.status-item {
+  background-color: #0b1020;
+  border: 1px solid #1f2640;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.status-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8b93b1;
+  margin-bottom: 0.25rem;
+}
+
+.status-value {
+  font-size: 0.95rem;
+  color: #e6e9f0;
+}
