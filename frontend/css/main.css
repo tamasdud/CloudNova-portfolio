@@ -85,6 +85,7 @@ main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem;
+  perspective: 1200px;
 }
 
 /* =========================
@@ -123,11 +124,18 @@ section.visible {
   opacity: 1;
   transform: translateY(0);
 }
+section.visible:not(.active-section) {
+  opacity: 0.85;
+}
 
 section.active-section {
-  box-shadow: 0 0 0 1px rgba(58, 75, 255, 0.35),
-              0 12px 40px rgba(0, 0, 0, 0.35);
-  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(58, 75, 255, 0.35),
+    0 18px 60px rgba(0, 0, 0, 0.45);
+
+  transform:
+    translateY(-6px)
+    translateZ(40px);
 }
 
 /* =========================
