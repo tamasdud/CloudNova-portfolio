@@ -1,0 +1,14 @@
+# macOS system files
+.DS_Store
+
+# Node / frontend (future-proof)
+node_modules/
+
+# Terraform (future-proof)
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Python (future-proof)
+__pycache__/
+*.pyc
