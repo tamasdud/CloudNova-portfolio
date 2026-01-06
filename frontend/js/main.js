@@ -37,5 +37,29 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.add("active");
     });
   });
+  // Sync navigation with scroll position
+  const observerOptions = {
+    root: null,
+    threshold: 0.6,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+
+        navLinks.forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${id}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  Object.values(sections).forEach(section => {
+    if (section) observer.observe(section);
+  });
 
 });
