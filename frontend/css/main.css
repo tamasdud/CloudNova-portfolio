@@ -2,7 +2,7 @@
    Global reset & base styles
    ========================= */
 
-   :root {
+:root {
   --accent-overview: #3a4bff;
   --accent-skills: #2bb0ed;
   --accent-projects: #35c98a;
@@ -22,7 +22,8 @@ html {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Ubuntu, sans-serif;
   background-color: #0b0f1a;
   color: #e6e9f0;
   line-height: 1.6;
@@ -83,7 +84,7 @@ a:focus-visible {
 section:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px rgba(58, 75, 255, 0.6),
-              0 16px 48px rgba(0, 0, 0, 0.45);
+    0 16px 48px rgba(0, 0, 0, 0.45);
 }
 
 /* =========================
@@ -102,10 +103,11 @@ main {
    ========================= */
 
 section {
+  position: relative;
+
   min-height: 100vh;
   padding: 4rem 6rem;
   margin-bottom: 3rem;
-  padding-bottom: 2rem;
   border-bottom: 1px solid #1e2333;
 
   display: flex;
@@ -114,11 +116,9 @@ section {
 
   scroll-snap-align: start;
 
-  /* Entrance default */
   opacity: 0;
   transform: translateY(12px);
 
-  /* Unified transitions */
   transition:
     opacity 0.6s ease,
     transform 0.6s ease,
@@ -133,12 +133,31 @@ section.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
 section.visible:not(.active-section) {
   opacity: 0.85;
 }
 
 section.active-section {
-    section[data-accent="overview"].active-section {
+  transform: translateY(-6px) translateZ(40px);
+}
+
+/* Vertical accent bar */
+section.active-section::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 24px;
+  width: 3px;
+  height: calc(100% - 48px);
+  background-color: currentColor;
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+/* Accent shadows per section */
+
+section[data-accent="overview"].active-section {
   box-shadow:
     0 0 0 1px var(--accent-overview),
     0 18px 60px rgba(58, 75, 255, 0.35);
@@ -174,39 +193,40 @@ section[data-accent="about"].active-section {
     0 18px 60px rgba(155, 108, 255, 0.35);
 }
 
-  box-shadow:
-    0 0 0 1px rgba(58, 75, 255, 0.35),
-    0 18px 60px rgba(0, 0, 0, 0.45);
-
-  transform:
-    translateY(-6px)
-    translateZ(40px);
-}
-
 /* =========================
-   Section content
-   ========================= */
-/* =========================
-   Section headers & anchors
+   Section headers
    ========================= */
 
 .section-header {
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .section-label {
-  display: block;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #8b93b1;
-  margin-bottom: 0.25rem;
 }
 
 .section-title {
   font-size: 1.6rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
+}
+
+/* Active dot */
+.section-title::after {
+  content: "●";
+  font-size: 0.6rem;
+  margin-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+section.active-section > .section-header .section-title::after {
+  opacity: 0.8;
 }
 
 .section-accent-line {
@@ -214,11 +234,6 @@ section[data-accent="about"].active-section {
   height: 2px;
   background-color: currentColor;
   opacity: 0.6;
-}
-
-section h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
 }
 
 section p {
@@ -248,10 +263,7 @@ section p {
   box-shadow:
     0 25px 70px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
-  transform: translateZ(20px);
 }
-
 
 /* Standard panels */
 .panel {
@@ -263,16 +275,6 @@ section p {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.03),
     0 10px 30px rgba(0, 0, 0, 0.35);
-
-  transform: translateZ(10px);
-}
-
-.panel h2 {
-  margin-bottom: 0.75rem;
-}
-
-.panel:hover {
-  border-color: #3a4bff;
 }
 
 /* =========================
@@ -294,12 +296,10 @@ section p {
 }
 
 .status-label {
-  display: block;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #8b93b1;
-  margin-bottom: 0.25rem;
 }
 
 .status-value {
