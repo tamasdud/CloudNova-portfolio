@@ -294,15 +294,21 @@ section[data-accent="about"].active-section {
 /* Active dot */
 .section-title::after {
   content: "●";
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   margin-left: 0.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  color: var(--active-accent);
+  opacity: 0.25;
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
 }
 
+
 section.active-section > .section-header .section-title::after {
-  opacity: 0.8;
+  opacity: 1;
+  filter: drop-shadow(0 0 6px var(--active-accent));
 }
+
 
 .section-accent-line {
   width: 48px;
@@ -809,4 +815,28 @@ footer {
   color: #8b93b1;
   font-size: 0.85rem;
   border-top: 1px solid #1e2333;
+}
+/* =========================
+   Idle system pulse
+   ========================= */
+
+@keyframes idlePulse {
+  0% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0.22;
+  }
+}
+
+section.visible:not(.active-section) .section-title::after {
+  animation: idlePulse 3.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  section.visible:not(.active-section) .section-title::after {
+    animation: none;
+  }
 }
