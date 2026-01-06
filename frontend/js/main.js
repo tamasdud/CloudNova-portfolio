@@ -67,6 +67,41 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       currentIndex = Math.min(currentIndex + 1, sectionOrder.length - 1);
       sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
+      sectionOrder[currentIndex].focus({ preventScroll: true });
+    }
+
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      currentIndex = Math.max(currentIndex - 1, 0);
+      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
+      sectionOrder[currentIndex].focus({ preventScroll: true });
+    }
+
+    if (event.key === "Home") {
+      event.preventDefault();
+      currentIndex = 0;
+      sectionOrder[0].scrollIntoView({ behavior: "smooth" });
+      sectionOrder[currentIndex].focus({ preventScroll: true });
+    }
+
+    if (event.key === "End") {
+      event.preventDefault();
+      currentIndex = sectionOrder.length - 1;
+      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
+      sectionOrder[currentIndex].focus({ preventScroll: true });
+    }
+  });
+});
+  // Keyboard navigation between sections
+  const sectionOrder = Object.values(sections).filter(Boolean);
+
+  let currentIndex = 0;
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      currentIndex = Math.min(currentIndex + 1, sectionOrder.length - 1);
+      sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
     }
 
     if (event.key === "ArrowUp") {
@@ -87,4 +122,3 @@ document.addEventListener("DOMContentLoaded", () => {
       sectionOrder[currentIndex].scrollIntoView({ behavior: "smooth" });
     }
   });
-});

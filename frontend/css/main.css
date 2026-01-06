@@ -58,6 +58,22 @@ nav a.active {
   font-weight: 500;
 }
 /* =========================
+   Focus-visible accessibility
+   ========================= */
+
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(58, 75, 255, 0.8);
+  border-radius: 4px;
+}
+
+section:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(58, 75, 255, 0.6),
+              0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================
    Active section focus
    ========================= */
 
