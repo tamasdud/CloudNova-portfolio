@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
         const id = entry.target.getAttribute("id");
 
         navLinks.forEach(link => {
