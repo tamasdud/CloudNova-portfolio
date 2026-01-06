@@ -31,6 +31,52 @@ body {
   overscroll-behavior-y: contain;
   scroll-snap-type: y mandatory;
 }
+/* =========================
+   Environment layer (office background)
+   ========================= */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(58, 75, 255, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(43, 176, 237, 0.08),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 85%,
+      rgba(155, 108, 255, 0.06),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #0b0f1a,
+      #070a12
+    );
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
 
 /* =========================
    Header / Navigation
@@ -97,6 +143,9 @@ main {
   margin: 0 auto;
   padding: 2rem;
   perspective: 1200px;
+  position: relative;
+  z-index: 1;
+
 }
 
 /* =========================
@@ -138,20 +187,22 @@ section.visible {
 section.visible:not(.active-section) {
   opacity: 0.78;
 }
-section:not(.active-section) .section-header {
-  filter: none;
+section.visible:not(.active-section) {
+  opacity: 0.82;
+  filter: brightness(0.92);
 }
+
 
 
 section.active-section {
   transform:
     translateY(-6px)
-    translateZ(40px)
+    translateZ(55px)
     scale(1.01);
     box-shadow:
       inset 0 0 0 1px color-mix(in srgb, var(--active-accent) 35%, transparent),
       0 18px 60px rgba(0, 0, 0, 0.45);
-
+  filter: brightness(1.08) contrast(1.02);
 }
 
 
@@ -300,6 +351,9 @@ section p {
   box-shadow:
     0 25px 70px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  z-index: 3;
+  filter: brightness(1.05);
+  transform: translateZ(35px);
 }
 
 /* Standard panels */
@@ -312,7 +366,48 @@ section p {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.03),
     0 10px 30px rgba(0, 0, 0, 0.35);
+  transform: translateZ(10px) rotateX(0.6deg);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+
 }
+/* =========================
+   Panel bezel (monitor frame)
+   ========================= */
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.4);
+}
+/* =========================
+   Panel glass reflection
+   ========================= */
+
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02) 30%,
+    transparent 55%
+  );
+
+  opacity: 0.35;
+}
+
 /* =========================
    Project cards (proof-first)
    ========================= */
