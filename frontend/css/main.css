@@ -87,3 +87,39 @@ footer {
   font-size: 0.85rem;
   border-top: 1px solid #1e2333;
 }
+/* =========================
+   Control Center Layout
+   ========================= */
+
+.control-center {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* Main overview panel */
+.panel-main {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #131a2f, #0f1424);
+  border: 1px solid #1f2640;
+  border-radius: 12px;
+  padding: 2.5rem;
+}
+
+/* Standard panels */
+.panel {
+  background-color: #0f1424;
+  border: 1px solid #1f2640;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+/* Panel headings */
+.panel h2 {
+  margin-bottom: 0.75rem;
+}
+
+/* Slight hover hint (no animation yet) */
+.panel:hover {
+  border-color: #3a4bff;
+}
