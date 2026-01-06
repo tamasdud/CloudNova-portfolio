@@ -2,6 +2,15 @@
    Global reset & base styles
    ========================= */
 
+   :root {
+  --accent-overview: #3a4bff;
+  --accent-skills: #2bb0ed;
+  --accent-projects: #35c98a;
+  --accent-architecture: #f2b94b;
+  --accent-devops: #e5533d;
+  --accent-about: #9b6cff;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -129,6 +138,42 @@ section.visible:not(.active-section) {
 }
 
 section.active-section {
+    section[data-accent="overview"].active-section {
+  box-shadow:
+    0 0 0 1px var(--accent-overview),
+    0 18px 60px rgba(58, 75, 255, 0.35);
+}
+
+section[data-accent="skills"].active-section {
+  box-shadow:
+    0 0 0 1px var(--accent-skills),
+    0 18px 60px rgba(43, 176, 237, 0.35);
+}
+
+section[data-accent="projects"].active-section {
+  box-shadow:
+    0 0 0 1px var(--accent-projects),
+    0 18px 60px rgba(53, 201, 138, 0.35);
+}
+
+section[data-accent="architecture"].active-section {
+  box-shadow:
+    0 0 0 1px var(--accent-architecture),
+    0 18px 60px rgba(242, 185, 75, 0.35);
+}
+
+section[data-accent="devops"].active-section {
+  box-shadow:
+    0 0 0 1px var(--accent-devops),
+    0 18px 60px rgba(229, 83, 61, 0.35);
+}
+
+section[data-accent="about"].active-section {
+  box-shadow:
+    0 0 0 1px var(--accent-about),
+    0 18px 60px rgba(155, 108, 255, 0.35);
+}
+
   box-shadow:
     0 0 0 1px rgba(58, 75, 255, 0.35),
     0 18px 60px rgba(0, 0, 0, 0.45);
