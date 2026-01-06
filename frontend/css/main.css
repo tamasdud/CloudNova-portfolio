@@ -186,6 +186,35 @@ section[data-accent="about"].active-section {
 /* =========================
    Section content
    ========================= */
+/* =========================
+   Section headers & anchors
+   ========================= */
+
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8b93b1;
+  margin-bottom: 0.25rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.section-accent-line {
+  width: 48px;
+  height: 2px;
+  background-color: currentColor;
+  opacity: 0.6;
+}
 
 section h2 {
   font-size: 1.4rem;
