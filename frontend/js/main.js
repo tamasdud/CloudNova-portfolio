@@ -1,123 +1,81 @@
 /**
  * CloudNova Control Center
- * ------------------------
- * Single-source-of-truth section state.
- * Active section = closest to viewport center.
+ * Interaction logic (stable, non-jumping)
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("CloudNova Control Center initialized");
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll("nav a");
 
   /* =========================
-     Cache DOM elements
+     Utility helpers
      ========================= */
 
-  const sections = Array.from(document.querySelectorAll("main section"));
-  const navLinks = Array.from(document.querySelectorAll("nav a"));
+  function clearActive() {
+    sections.forEach(s => s.classList.remove("active-section"));
+    navLinks.forEach(l => l.classList.remove("active"));
+  }
 
-  if (!sections.length) return;
+  function activateSection(section) {
+    if (!section) return;
 
-  let currentIndex = 0;
+    clearActive();
+    section.classList.add("active-section");
 
-  /* =========================
-     Active section resolver
-     ========================= */
-
-  function updateActiveSection() {
-    const viewportCenter = window.innerHeight / 2;
-
-    let closestSection = null;
-    let smallestDistance = Infinity;
-
-    sections.forEach(section => {
-      const rect = section.getBoundingClientRect();
-      const sectionCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(viewportCenter - sectionCenter);
-
-      if (distance < smallestDistance) {
-        smallestDistance = distance;
-        closestSection = section;
+    const id = section.getAttribute("id");
+    navLinks.forEach(link => {
+      if (link.getAttribute("href") === `#${id}`) {
+        link.classList.add("active");
       }
     });
-
-    if (!closestSection) return;
-
-    sections.forEach(section => {
-      section.classList.toggle(
-        "active-section",
-        section === closestSection
-      );
-
-      section.classList.toggle(
-        "visible",
-        section.getBoundingClientRect().top < window.innerHeight
-      );
-    });
-
-    const id = closestSection.id;
-
-    navLinks.forEach(link => {
-      link.classList.toggle(
-        "active",
-        link.getAttribute("href") === `#${id}`
-      );
-    });
-
-    currentIndex = sections.indexOf(closestSection);
   }
 
   /* =========================
-     Scroll handling
+     Desktop: mouseover highlight
      ========================= */
 
-  window.addEventListener("scroll", () => {
-    requestAnimationFrame(updateActiveSection);
-  });
-
-  updateActiveSection();
-
-  /* =========================
-     Navigation clicks
-     ========================= */
-
-  navLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute("href"));
-      if (!target) return;
-
-      target.scrollIntoView({ behavior: "smooth" });
-      target.focus({ preventScroll: true });
+  sections.forEach(section => {
+    section.addEventListener("mouseenter", () => {
+      activateSection(section);
     });
   });
 
   /* =========================
-     Keyboard navigation
+     Mobile: scroll-based highlight
      ========================= */
 
-  document.addEventListener("keydown", (event) => {
-    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    event.preventDefault();
+  if (isMobile) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            activateSection(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.6
+      }
+    );
 
-    if (event.key === "ArrowDown") {
-      currentIndex = Math.min(currentIndex + 1, sections.length - 1);
-    }
+    sections.forEach(section => observer.observe(section));
+  }
 
-    if (event.key === "ArrowUp") {
-      currentIndex = Math.max(currentIndex - 1, 0);
-    }
+  /* =========================
+     Nav click behavior
+     ========================= */
 
-    if (event.key === "Home") {
-      currentIndex = 0;
-    }
-
-    if (event.key === "End") {
-      currentIndex = sections.length - 1;
-    }
-
-    const target = sections[currentIndex];
-    target.scrollIntoView({ behavior: "smooth" });
-    target.focus({ preventScroll: true });
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const id = link.getAttribute("href")?.replace("#", "");
+      const target = document.getElementById(id);
+      if (target) activateSection(target);
+    });
   });
 });
+const observerOptions = {
+  root: null,
+  threshold: 0.45,
+};

@@ -32,74 +32,45 @@ body {
   scroll-snap-type: y mandatory;
 }
 /* =========================
-   Environment layer (office background)
+   Global background layer
    ========================= */
 
-body::before {
-  content: "";
+.background-layer {
   position: fixed;
   inset: 0;
+  z-index: -1;
   pointer-events: none;
-  z-index: -2;
 
   background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(58, 75, 255, 0.12),
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(43, 176, 237, 0.08),
-      transparent 55%
-    ),
-    radial-gradient(
-      circle at 80% 85%,
-      rgba(155, 108, 255, 0.06),
-      transparent 55%
-    ),
-    linear-gradient(
-      180deg,
-      #0b0f1a,
-      #070a12
-    );
-}
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
+    radial-gradient(circle at 20% 30%, rgba(58, 75, 255, 0.18), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(43, 176, 237, 0.14), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(155, 108, 255, 0.12), transparent 50%),
+    linear-gradient(180deg, #070b16 0%, #0b0f1a 100%);
 
-  background: radial-gradient(
-    ellipse at center,
-    transparent 55%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
+  filter: blur(0px);
 }
+
 
 /* =========================
    Header / Navigation
    ========================= */
 
 header {
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   padding: 1.5rem 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 15, 26, 0.95),
+    rgba(11, 15, 26, 0.85)
+  );
 
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(11, 15, 26, 0.95),
-      rgba(11, 15, 26, 0.85)
-    );
-
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid #1e2333;
-
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
 
 
 header h1 {
@@ -115,9 +86,19 @@ header p {
 nav ul {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
-  margin-top: 0.75rem;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
 }
+
+/* Mobile nav wrapping */
+@media (max-width: 768px) {
+  nav ul {
+    justify-content: center;
+    row-gap: 0.75rem;
+  }
+}
+
 
 nav a {
   position: relative;
@@ -174,7 +155,7 @@ main {
   perspective: 1200px;
   position: relative;
   z-index: 1;
-
+  background: transparent;
 }
 
 /* =========================
@@ -195,14 +176,15 @@ section {
 
   scroll-snap-align: start;
 
-  opacity: 0;
-  transform: translateY(12px);
+  /* Visible by default */
+  opacity: 1;
+  transform: translateY(0);
 
   transition:
-    opacity 0.6s ease,
     transform 0.6s ease,
     box-shadow 0.4s ease;
 }
+
 
 /* =========================
    Section states
@@ -222,17 +204,15 @@ section.visible:not(.active-section) {
 }
 
 
-
-section.active-section {
-  transform:
-    translateY(-6px)
-    translateZ(55px)
-    scale(1.01);
-    box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--active-accent) 35%, transparent),
-      0 18px 60px rgba(0, 0, 0, 0.45);
-  filter: brightness(1.08) contrast(1.02);
-}
+@media (max-width: 768px) {
+    section.active-section {
+        transform: translateZ(40px);
+        scale:(1.01);
+        box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--active-accent) 35%, transparent),
+        0 18px 60px rgba(0, 0, 0, 0.45);
+    filter: brightness(1.08) contrast(1.02);
+    }
 
 
 /* Vertical accent bar */
@@ -247,11 +227,16 @@ section.active-section::before {
   border-radius: 2px;
   opacity: 0.6;
 }
-
+section.active-section > .section-header .section-title::after {
+  opacity: 1;
+  filter: drop-shadow(0 0 6px var(--active-accent));
+}
+}
 /* Accent shadows per section */
 
 section[data-accent="overview"].active-section {
   --active-accent: var(--accent-overview);  
+  padding-top: 8rem;
   box-shadow:
     0 0 0 1px var(--accent-overview),
     0 18px 60px rgba(58, 75, 255, 0.35);
@@ -333,12 +318,6 @@ section[data-accent="about"].active-section {
 }
 
 
-section.active-section > .section-header .section-title::after {
-  opacity: 1;
-  filter: drop-shadow(0 0 6px var(--active-accent));
-}
-
-
 .section-accent-line {
   width: 48px;
   height: 2px;
@@ -372,8 +351,15 @@ section p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  align-items: start;
+  align-items: stretch; /* IMPORTANT */
+  background: transparent;
 }
+@media (max-width: 768px) {
+  .control-center {
+    grid-template-columns: 1fr;
+  }
+}
+    
 
 /* Main overview panel */
 .panel-main {
@@ -391,6 +377,7 @@ section p {
   transform: translateZ(35px);
 }
 
+
 /* Standard panels */
 .panel {
   background-color: #0f1424;
@@ -405,8 +392,45 @@ section p {
   position: relative;
   overflow: hidden;
   z-index: 2;
-
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
 }
+/* Full-width anchor sections */
+#overview,
+#about {
+  max-width: 100%;
+}
+#overview {
+  grid-column: 1 / -1;
+}
+
+#about {
+  grid-column: 1 / -1;
+}
+/* =========================
+   Desktop hover focus (authoritative)
+   ========================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .panel {
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .panel:hover,
+  .panel:focus-visible {
+    box-shadow:
+      0 0 0 1px var(--active-accent),
+      0 20px 60px rgba(0, 0, 0, 0.55);
+
+    transform: translateY(-4px) translateZ(30px);
+  }
+}
+
 /* =========================
    Panel bezel (monitor frame)
    ========================= */
@@ -786,6 +810,13 @@ section.active-section .skill-group {
   gap: 1.75rem;
   margin-top: 2.5rem;
 }
+/* Desktop: force 3-column status grid */
+@media (min-width: 1024px) {
+  .status-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 
 .status-item {
   position: relative;
@@ -867,5 +898,59 @@ section.visible:not(.active-section) .section-title::after {
 @media (prefers-reduced-motion: reduce) {
   section.visible:not(.active-section) .section-title::after {
     animation: none;
+  }
+}
+/* =========================
+   Desktop-only layout polish
+   ========================= */
+
+@media (min-width: 1024px) {
+  #overview {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  section.panel:not(.panel-main):only-child {
+    grid-column: 1 / -1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+/* =========================
+   Mobile layout corrections
+   ========================= */
+
+@media (max-width: 768px) {
+  section {
+    min-height: auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .control-center {
+    grid-template-columns: 1fr;
+  }
+}
+/* Vision section = full-width anchor */
+#about {
+  grid-column: 1 / -1;
+}
+/* =========================
+   FORCE Overview internal layout
+   ========================= */
+
+/* Desktop: 3 columns inside overview */
+#overview .overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* Mobile: 1 column inside overview */
+@media (max-width: 768px) {
+  #overview .overview-grid {
+    grid-template-columns: 1fr;
   }
 }
