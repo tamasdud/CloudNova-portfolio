@@ -35,3 +35,13 @@ cloudnova-portfolio/
 ├── infra/      # Terraform infrastructure definitions
 ├── docs/       # Architecture, security, and cost documentation
 └── README.md
+## Deployment
+
+This portfolio is deployed on AWS using Terraform.
+Infrastructure includes:
+- Private S3 bucket
+- CloudFront CDN with HTTPS
+- Origin Access Control (OAC)
+
+All infrastructure is defined as code and fully reproducible.
+
